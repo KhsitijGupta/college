@@ -5,6 +5,7 @@ import {
   X,
  
 } from "lucide-react"
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
       const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -34,12 +35,16 @@ const Navbar = () => {
                 >
                   Home
                 </a>
-                <a
-                  href="/aboutUs"
-                  className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                >
+                
+              
+                  <Link to={"/aboutUs"}
+                    className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+
+                  >
+                  
                   About
-                </a>
+                   </Link>
+                
                 <a
                   href="#"
                   className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
@@ -65,7 +70,7 @@ const Navbar = () => {
             <div className="md:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="custom-button inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+                className=" inline-flex items-center justify-center p-2 rounded-md text-black-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
               >
                 {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
