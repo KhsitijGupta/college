@@ -18,7 +18,7 @@ const Navbar = () => {
            <div className="flex bg-white">
             <div className="flex pt-5">
               <img src="/images/logo.png" alt="" className='h-15 w-20'  />
-              <h1 className="text-xl md:text-1xl font-extrabold text-blue-700 leading-snug">
+              <h1 className="text-xs md:text-lg pt-2 md:pt-0 font-extrabold text-blue-700 leading-snug">
                 वववि एवं ववविक सहायता<br />
                 <span className="text-gray-700">महाविद्यालय, शहडोल (म.प्र.)</span>
               </h1>
@@ -78,42 +78,42 @@ const Navbar = () => {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-lg">
               <a
-                href="#home"
+                href="/"
                 className="text-gray-900 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </a>
               <a
-                href="#about"
+                href="/aboutUs"
                 className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
               </a>
               <a
-                href="#programs"
+                href="#"
                 className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Programs
+                Blogs
               </a>
               <a
-                href="#admissions"
+                href="/eventGallery"
                 className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Admissions
+                Event Gallery
               </a>
               <a
-                href="#contact"
+                href="/contactUs"
                 className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
               </a>
               <div className="px-3 py-2">
-                <button className="w-full custom-button">Apply Now</button>
+                <button className="w-full custom-button"><a href="/addmissionForm"> Admissions</a></button>
               </div>
             </div>
           </div>
