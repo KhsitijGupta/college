@@ -3,7 +3,7 @@ import './App.css'
 import HomePage from "./pages/user/HomePage";
 import AboutUs from "./pages/user/AboutUs";
 import Blogs from "./pages/user/Blogs";
-import { Sidebar } from "../components/admin/sidebar";
+import { Sidebar } from "../components/admin/Sidebar";
 import EventGallery from "./pages/user/EventGallery";
 import CollegeAdmissionForm from "./pages/user/CollegeAdmissionForm";
 import ContactUs from "./pages/user/ContactUs";
