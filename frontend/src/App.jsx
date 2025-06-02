@@ -6,6 +6,7 @@ import Blogs from "./pages/user/Blogs";
 import { Sidebar } from "../components/admin/sidebar";
 import EventGallery from "./pages/user/EventGallery";
 import CollegeAdmissionForm from "./pages/user/CollegeAdmissionForm";
+import ContactUs from "./pages/user/ContactUs";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/adminpannel" element={<Sidebar />} />
         <Route path="/eventGallery" element={<EventGallery/>} />
+        <Route path="/contactUs" element={<ContactUs  />} />
         <Route path="/addmissionForm" element={<CollegeAdmissionForm  />} />
       </Routes>
     </Router>
