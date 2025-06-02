@@ -30,6 +30,22 @@ const Testimonials = () => {
       image:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80",
     },
+    {
+      name: "Emily Davis",
+      role: "Current Student",
+      content:
+        "I love the supportive community here. The teachers help us reach our potential and pursue our passions.",
+      image:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80",
+    },
+    {
+      name: "Emily Davis",
+      role: "Current Student",
+      content:
+        "I love the supportive community here. The teachers help us reach our potential and pursue our passions.",
+      image:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80",
+    },
   ];
 
   return (
