@@ -6,6 +6,13 @@ const foundationSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  name: {
+    type:String,
+    trim: true,
+  },
+  ourFoundationImage: {
+    type:String,
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Foundation', foundationSchema);

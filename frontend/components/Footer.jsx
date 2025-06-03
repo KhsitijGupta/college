@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
 
 const Footer = () => {
@@ -9,31 +10,31 @@ const Footer = () => {
             <div>
               <h3 className="text-xl font-bold mb-4">EduPrime School</h3>
               <p className="text-gray-400">Nurturing minds, building futures, creating leaders of tomorrow.</p>
-              <p className="mt-10 text-gray-400"> <a href='/adminpannel'>Admin Login </a></p>
+              <p className="mt-10 text-gray-400"> <Link to='/adminpannel'>Admin Login </Link></p>
            
             </div>
             <div>
               <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2">
                 <li>
-                  <a href="#about" className="text-gray-400 hover:text-white">
+                  <Link to="/aboutUs" className="text-gray-400 hover:text-white">
                     About Us
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#programs" className="text-gray-400 hover:text-white">
-                    Programs
-                  </a>
+                  <Link to="#" className="text-gray-400 hover:text-white">
+                    Blogs
+                  </Link>
                 </li>
                 <li>
-                  <a href="#admissions" className="text-gray-400 hover:text-white">
+                  <Link to="/addmissionForm" className="text-gray-400 hover:text-white">
                     Admissions
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#contact" className="text-gray-400 hover:text-white">
+                  <Link to="/contactUs" className="text-gray-400 hover:text-white">
                     Contact
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -41,24 +42,24 @@ const Footer = () => {
               <h4 className="text-lg font-semibold mb-4">Programs</h4>
               <ul className="space-y-2">
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white">
+                  <Link to="#" className="text-gray-400 hover:text-white">
                     Elementary
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white">
+                  <Link to="#" className="text-gray-400 hover:text-white">
                     Middle School
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white">
+                  <Link to="#" className="text-gray-400 hover:text-white">
                     High School
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white">
+                  <Link to="#" className="text-gray-400 hover:text-white">
                     Extracurriculars
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

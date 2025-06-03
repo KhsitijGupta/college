@@ -4,7 +4,7 @@ import { Upload, X, ImageIcon, Check } from "lucide-react";
 
 const ImageUploader = ({
   title = "Upload Images",
-  maxImages = 3,
+  maxImages ,
   uploadUrl,
   onUploadSuccess,
   inputName = "image",
@@ -74,12 +74,22 @@ const ImageUploader = ({
     setUploadSuccess(false);
     setUploadError(null);
 
-    const formData = new FormData();
+  const formData = new FormData();
+    console.log(selectedImages.length)
+  if (selectedImages.length === 1) {
+    // For single image, use fixed field name
+    formData.append(inputName, selectedImages[0]);
+    console.log(formData)
+  } else {
+    // For multiple images, append with index (inputName1, inputName2, etc.)
     selectedImages.forEach((image, index) => {
       formData.append(`${inputName}${index + 1}`, image);
     });
+  }
 
     try {
+      // debugger;
+      console.log(uploadUrl)
       const response = await axios.post(uploadUrl, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -131,6 +141,7 @@ const ImageUploader = ({
           >
             <input
               ref={fileInputRef}
+              name={inputName}
               type="file"
               accept="image/*"
               multiple

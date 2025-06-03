@@ -29,12 +29,12 @@ const Navbar = () => {
             {/* Desktop Menu */}
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
-                <a
-                  href="/"
+                <Link
+                  to="/"
                   className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   Home
-                </a>
+                </Link>
                 
               
                   <Link to={"/aboutUs"}
@@ -45,24 +45,24 @@ const Navbar = () => {
                   About
                    </Link>
                 
-                <a
-                  href="#"
+                <Link
+                  to="#"
                   className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   Blogs
-                </a>
-                <a href="/eventGallery"
+                </Link>
+                <Link to="/eventGallery"
                   className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   Event Gallery
-                </a>
-                <a
-                  href="/contactUs"
+                </Link>
+                <Link
+                  to="/contactUs"
                   className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   Contact
-                </a>
-                <button className="ml-4 custom-button"> <a href="/addmissionForm"> Admissions</a></button>
+                </Link>
+                <button className="ml-4 custom-button"> <Link to="/addmissionForm"> Admissions</Link></button>
               </div>
             </div>
 
@@ -82,43 +82,43 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-lg">
-              <a
-                href="/"
+              <Link
+                to="/"
                 className="text-gray-900 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
-              </a>
-              <a
-                href="/aboutUs"
+              </Link>
+              <Link
+                to="/aboutUs"
                 className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="#"
                 className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Blogs
-              </a>
-              <a
-                href="/eventGallery"
+              </Link>
+              <Link
+                to="/eventGallery"
                 className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Event Gallery
-              </a>
-              <a
-                href="/contactUs"
+              </Link>
+              <Link
+                to="/contactUs"
                 className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
-              </a>
+              </Link>
               <div className="px-3 py-2">
-                <button className="w-full custom-button"><a href="/addmissionForm"> Admissions</a></button>
+                <button className="w-full custom-button"><Link to="/addmissionForm"> Admissions</Link></button>
               </div>
             </div>
           </div>

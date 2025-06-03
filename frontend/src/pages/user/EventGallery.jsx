@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Navbar from "../../../components/Navbar";
+import Footer from "../../../components/Footer";
 
 const EventGallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -48,8 +49,8 @@ const EventGallery = () => {
   return (
     <>
       <Navbar />
-      <div className="relative top-17 min-h-screen bg-gray-100 py-8 px-4">
-        <div className="max-w-6xl mx-auto">
+      <div className="min-h-screen bg-gray-100 py-8 px-4">
+        <div className="max-w-6xl mx-auto mt-15">
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-gray-800 mb-2">College Event Gallery</h1>
@@ -104,6 +105,7 @@ const EventGallery = () => {
           )}
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

@@ -1,33 +1,63 @@
 import React from 'react';
 import { useState, useEffect } from "react"
+import axios from "axios";
+
 import {
   ChevronLeft,
   ChevronRight,} from "lucide-react"
   
   const Herosection = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
-  
-    const heroSlides = [
-      {
-        image:"https://images.unsplash.com/photo-1640480920935-c9d02c060d1d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        title: "Excellence in Education",
-        subtitle: "Nurturing minds, building futures, creating leaders of tomorrow",
-        cta: "Learn More",
-      },
-      {
-        image:"https://plus.unsplash.com/premium_photo-1664110691200-0d37f5d0aea5?q=80&w=1645&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        title: "Modern Learning Environment",
-        subtitle: "State-of-the-art facilities and innovative teaching methods",
-        cta: "Take a Tour",
-      },
-      {
-        image:"https://plus.unsplash.com/premium_photo-1680807988328-7ba28ad24d9f?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        title: "Join Our Community",
-        subtitle: "Where every student matters and every dream is possible",
-        cta: "Apply Now",
-      },
-    ]
+    const [images, setImages] = useState([]); // Array of image filenames
 
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await axios.get("/api/home/bannerImages");
+        setImages(response.data); // response.data is array of image URLs
+      } catch (err) {
+        alert(err.message || "Failed to fetch images");
+      } 
+    };
+    fetchImages();
+  }, []);
+
+  const fallbackSlides = [
+    {
+      title: "Excellence in Education",
+      subtitle: "Nurturing minds, building futures, creating leaders of tomorrow",
+      cta: "Learn More",
+    },
+    {
+      title: "Modern Learning Environment",
+      subtitle: "State-of-the-art facilities and innovative teaching methods",
+      cta: "Take a Tour",
+    },
+    {
+      title: "Join Our Community",
+      subtitle: "Where every student matters and every dream is possible",
+      cta: "Apply Now",
+    },
+  ];
+
+  // Combine fetched image paths with slide metadata
+  const heroSlides = images.map((img, i) => ({
+    image: `/uploads/Home/${img}`,
+    ...fallbackSlides[i], // merge corresponding title/subtitle/cta
+  }));
+  // Use fallbackSlides with hardcoded images if no uploaded images
+  const finalSlides = heroSlides.length ? heroSlides : fallbackSlides.map((slide, i) => ({
+    ...slide,
+    image: [
+      "https://images.unsplash.com/photo-1640480920935-c9d02c060d1d?q=80&w=1470&auto=format&fit=crop",
+      "https://plus.unsplash.com/premium_photo-1664110691200-0d37f5d0aea5?q=80&w=1645&auto=format&fit=crop",
+      "https://plus.unsplash.com/premium_photo-1680807988328-7ba28ad24d9f?q=80&w=1471&auto=format&fit=crop"
+    ][i],
+  }));
+
+
+  
     useEffect(() => {
       const timer = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
@@ -48,7 +78,7 @@ import {
     <div>
             <section id="home" className="relative h-140 overflow-hidden">
         <div className="relative h-full">
-          {heroSlides.map((slide, index) => (
+          {finalSlides.map((slide, index) => (
             <div
               key={index}
               className={`absolute inset-0 transition-opacity duration-1000 ${

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import AddHomeBanner from "../../src/pages/admin/Home/AddHomeBanner"
 import AllBannerImages from "../../src/pages/admin/Home/AllBannerImages"
 
-import AddAboutImage from "../../src/pages/admin/About/AddAboutImage"
+import AddAboutContent from "../../src/pages/admin/About/AddAboutContent"
 import MissionVision from "../../src/pages/admin/About/MissionVision"
 import OurFoundation from "../../src/pages/admin/About/OurFoundation"
 
@@ -114,7 +114,7 @@ export function Sidebar() {
                 {
                   label: "About Us",
                   icon: Users,
-                  submenu: ["Add About Image", "Mission & Vision", "Our Foundation"],
+                  submenu: ["Add About Content", "Mission & Vision", "Our Foundation"],
                 },
                 {
                   label: "Blog Section",
@@ -251,7 +251,7 @@ export function Sidebar() {
           {activeView === "Add Home Banner" && <AddHomeBanner/>}
           {activeView === "All Banner Images" && <AllBannerImages/>}
 
-          {activeView === "Add About Image" && <AddAboutImage />}
+          {activeView === "Add About Content" && <AddAboutContent />}
           {activeView === "Mission & Vision" && <MissionVision />}
           {activeView === "Our Foundation" && <OurFoundation />}
 

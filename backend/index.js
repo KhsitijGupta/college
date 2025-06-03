@@ -7,8 +7,8 @@ const dotenv = require('dotenv')
 dotenv.config();
 
 const cors = require("cors");
-const missionVisionRouter = require('./routes/AboutRoutes');
 const HomeRouter = require('./routes/HomeRoutes');
+const AboutRoute = require('./routes/AboutRoutes');
 app.use(cors());
 
 app.use(express.json());
@@ -29,7 +29,7 @@ async function connectToDB(){
 connectToDB();
 
 
-app.use('/api/about',missionVisionRouter)
+app.use('/api/about',AboutRoute)
 app.use('/api/home',HomeRouter)
 
 

@@ -44,7 +44,7 @@ module.exports.getBannerImages = async (req, res) => {
   }
 };
 
-app.delete('/api/home/deleteBannerImages', async (req, res) => {
+module.exports.DeleteImage = async (req, res) => {
   try {
     const { imageUrl } = req.body;
 
@@ -59,14 +59,31 @@ app.delete('/api/home/deleteBannerImages', async (req, res) => {
     }
 
     let updatedFields = {};
+    let imageMatched = false;
 
-    if (document.image1 === imageUrl) updatedFields.image1 = null;
-    else if (document.image2 === imageUrl) updatedFields.image2 = null;
-    else if (document.image3 === imageUrl) updatedFields.image3 = null;
-    else {
-      return res.status(404).json({ error: "Image URL not found" });
+    // Check and nullify matched image fields
+    if (document.image1 === imageUrl) {
+      updatedFields.image1 = null;
+      imageMatched = true;
+    } else if (document.image2 === imageUrl) {
+      updatedFields.image2 = null;
+      imageMatched = true;
+    } else if (document.image3 === imageUrl) {
+      updatedFields.image3 = null;
+      imageMatched = true;
     }
 
+    if (!imageMatched) {
+      return res.status(404).json({ error: "Image URL not found in database" });
+    }
+
+    // Remove image from filesystem
+    const imagePath = path.join(__dirname, "../../uploads/Home", imageUrl);
+    if (fs.existsSync(imagePath)) {
+      fs.unlinkSync(imagePath);
+    }
+
+    // Update DB
     await SingletonImages.updateOne({ _id: document._id }, { $set: updatedFields });
 
     res.json({ message: "Image deleted successfully" });
@@ -74,4 +91,4 @@ app.delete('/api/home/deleteBannerImages', async (req, res) => {
     console.error(error);
     res.status(500).json({ error: "Failed to delete image" });
   }
-});
+};
