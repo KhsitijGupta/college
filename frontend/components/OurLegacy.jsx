@@ -35,7 +35,7 @@ const OurLegacy = () => {
           {/* Image Section */}
           <div className="w-full md:w-1/3">
             <img
-              src={`/uploads/About/${data.ourFoundationImage}`}
+              src={`/uploads/About/${data.ourFoundationImage}`|| 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCMv4JAeDMdh5y1NUWlFb2X-lMtDcr5Tu5QA&s'}
               alt="College legacy"
               className="rounded-2xl shadow-lg w-full object-cover aspect-[1]"
             />
