@@ -10,6 +10,7 @@ const OurLegacy = () => {
   useEffect(() => {
     axios.get('/api/about/getfoundation')
       .then((response) => {
+        console.log(response.data.foundation)
         setData(response.data.foundation);
         setLoading(false);
       })
