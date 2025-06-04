@@ -10,7 +10,7 @@ const Footer = () => {
             <div>
               <h3 className="text-xl font-bold mb-4">EduPrime School</h3>
               <p className="text-gray-400">Nurturing minds, building futures, creating leaders of tomorrow.</p>
-              <p className="mt-10 text-gray-400"> <Link to='/adminpannel'>Admin Login </Link></p>
+              <p className="mt-10 text-gray-400"> <Link to='/vvs/panelLogin'>Admin Login </Link></p>
            
             </div>
             <div>

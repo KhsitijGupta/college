@@ -9,8 +9,8 @@ const AddEventImages = () => {
   return (
     <ImageUploader
       title="Upload Events Images"
-      maxImages={1}
-      uploadUrl="/api/Event/uploadEventImages"
+      maxImages={10}
+      uploadUrl="/api/event/uploadEventImages"
       onUploadSuccess={handleUploadSuccess}
       inputName="image"
     />

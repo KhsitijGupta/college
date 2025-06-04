@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom";
+
 import AddHomeBanner from "../../src/pages/admin/Home/AddHomeBanner"
 import AllBannerImages from "../../src/pages/admin/Home/AllBannerImages"
 
@@ -23,20 +25,34 @@ import {
   LogOut,
   Menu,
   X,
-  GalleryVertical 
+  GalleryVertical
 
 } from "lucide-react"
 
 
 export function Sidebar() {
+
+  const navigate = useNavigate();
+
   const [collapsed, setCollapsed] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [openMenus, setOpenMenus] = useState({ Dashboard: false })
   // const [userDropdownOpen, setUserDropdownOpen] = useState(false)
-    const [activeView, setActiveView] = useState("Dashboard")
+  const [activeView, setActiveView] = useState("Dashboard")
 
+  useEffect(() => {
+    const adminUser = sessionStorage.getItem("adminUser");
 
-  // Handle responsive behavior
+    if (!adminUser) {
+      navigate("/vvs/panel/login");
+    }
+  }, [navigate]);
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("adminUser");
+    navigate("/vvs/panel/login");
+  };
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
@@ -69,9 +85,8 @@ export function Sidebar() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex h-full flex-col bg-white border-r border-gray-200 shadow-lg transition-all duration-300 lg:relative lg:translate-x-0 ${
-          collapsed ? "w-16" : "w-64"
-        } ${mobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
+        className={`fixed inset-y-0 left-0 z-40 flex h-full flex-col bg-white border-r border-gray-200 shadow-lg transition-all duration-300 lg:relative lg:translate-x-0 ${collapsed ? "w-16" : "w-64"
+          } ${mobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
       >
         {/* Sidebar Header */}
         <div className="flex h-16 items-center justify-between border-b border-gray-200 px-4">
@@ -108,8 +123,8 @@ export function Sidebar() {
                 },
                 {
                   label: "Banner",
-                  icon: GalleryVertical ,
-                  submenu: ["Add Home Banner" , "All Banner Images"],
+                  icon: GalleryVertical,
+                  submenu: ["Add Home Banner", "All Banner Images"],
                 },
                 {
                   label: "About Us",
@@ -130,9 +145,8 @@ export function Sidebar() {
                 <div key={label}>
                   <button
                     onClick={() => toggleMenu(label)}
-                    className={`flex w-full items-center rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-gray-100 ${
-                      bg || "text-gray-700 hover:text-gray-900"
-                    }`}
+                    className={`flex w-full items-center rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-gray-100 ${bg || "text-gray-700 hover:text-gray-900"
+                      }`}
                   >
                     <Icon className={`h-5 w-5 ${collapsed ? "mx-auto" : "mr-3"} flex-shrink-0`} />
                     {!collapsed && (
@@ -140,9 +154,8 @@ export function Sidebar() {
                         <span className="flex-1 truncate text-left">{label}</span>
                         {submenu.length > 0 && (
                           <ChevronDown
-                            className={`h-4 w-4 transition-transform flex-shrink-0 ${
-                              openMenus[label] ? "rotate-180" : ""
-                            }`}
+                            className={`h-4 w-4 transition-transform flex-shrink-0 ${openMenus[label] ? "rotate-180" : ""
+                              }`}
                           />
                         )}
                       </>
@@ -159,16 +172,16 @@ export function Sidebar() {
                         // >
                         //   {title}
                         // </a>
-                         <button
-                            key={title}
-                            onClick={() => {
-                              setActiveView(title)
-                              closeMobileMenu()
-                            }}
-                            className="block text-left w-full rounded-md py-2 pl-3 pr-4 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
-                          >
-                            {title}
-                          </button>
+                        <button
+                          key={title}
+                          onClick={() => {
+                            setActiveView(title)
+                            closeMobileMenu()
+                          }}
+                          className="block text-left w-full rounded-md py-2 pl-3 pr-4 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+                        >
+                          {title}
+                        </button>
                       ))}
                     </div>
                   )}
@@ -237,19 +250,19 @@ export function Sidebar() {
             </button>
             <h1 className="text-lg font-semibold text-gray-900 truncate">Admin Dashboard</h1>
           </div>
-          <a
-                href="/logout"
-                className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
-              >
-                <LogOut className="mr-2 h-4 w-4" />
-                Log out
-              </a>
+          <button
+            onClick={handleLogout}
+            className="hover:cursor-pointer flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+          >
+            <LogOut className="mr-2 h-4 w-4" />
+            Log out
+          </button>
         </header>
 
         {/* Main Content Area */}
         <main className="flex-1 p-4 sm:p-6 bg-gray-50 overflow-y-auto">
-          {activeView === "Add Home Banner" && <AddHomeBanner/>}
-          {activeView === "All Banner Images" && <AllBannerImages/>}
+          {activeView === "Add Home Banner" && <AddHomeBanner />}
+          {activeView === "All Banner Images" && <AllBannerImages />}
 
           {activeView === "Add About Content" && <AddAboutContent />}
           {activeView === "Mission & Vision" && <MissionVision />}

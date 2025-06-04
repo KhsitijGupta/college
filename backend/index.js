@@ -9,6 +9,8 @@ dotenv.config();
 const cors = require("cors");
 const HomeRouter = require('./routes/HomeRoutes');
 const AboutRoute = require('./routes/AboutRoutes');
+const EventRouter = require('./routes/EventRoutes');
+const AdminRouter = require('./routes/AdminRoutes');
 app.use(cors());
 
 app.use(express.json());
@@ -29,8 +31,10 @@ async function connectToDB(){
 connectToDB();
 
 
-app.use('/api/about',AboutRoute)
 app.use('/api/home',HomeRouter)
+app.use('/api/about',AboutRoute)
+app.use('/api/event',EventRouter)
+app.use('/api/admin',AdminRouter)
 
 
 const port = process.env.Port || 3000;
