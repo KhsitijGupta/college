@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
 import ImageUploader from "../../../../components/admin/ImageUploader";
 
@@ -11,7 +11,21 @@ const AddAboutContent = () => {
     collegeAcceptance: "",
     yearsOfExcellence: "",
   });
-
+ // Fetch data on mount
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("/api/about/getAboutContent");
+        console.log()
+        if (res.data?.data) {
+          setFormData(res.data?.data);
+        }
+      } catch (error) {
+        console.error("Error fetching about content:", error);
+      }
+    };
+    fetchData();
+  }, []);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({

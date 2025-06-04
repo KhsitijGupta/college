@@ -16,7 +16,7 @@ AboutRoute.post('/uploadOurFoundationImages',uploadFoundationImage.single('image
 AboutRoute.get('/getfoundation', getFoundation);
 
 AboutRoute.post('/uploadAboutContent', updateAboutContent);
-AboutRoute.get('/getrAboutContent', getAboutContent);
+AboutRoute.get('/getAboutContent', getAboutContent);
 AboutRoute.post('/uploadAboutContentImages',uploadFoundationImage.single('image'),createOrUpdateAboutimage);
 
 module.exports = AboutRoute;

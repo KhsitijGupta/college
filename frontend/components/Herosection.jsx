@@ -41,12 +41,10 @@ import {
     },
   ];
 
-  // Combine fetched image paths with slide metadata
   const heroSlides = images.map((img, i) => ({
     image: `/uploads/Home/${img}`,
-    ...fallbackSlides[i], // merge corresponding title/subtitle/cta
+    ...fallbackSlides[i], 
   }));
-  // Use fallbackSlides with hardcoded images if no uploaded images
   const finalSlides = heroSlides.length ? heroSlides : fallbackSlides.map((slide, i) => ({
     ...slide,
     image: [
