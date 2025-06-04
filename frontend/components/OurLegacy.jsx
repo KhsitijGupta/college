@@ -33,11 +33,13 @@ const OurLegacy = () => {
         <div className="bg-white mb-7 rounded-2xl md:shadow-lg p-6 sm:p-8 md:p-12 border border-blue-100 max-w-6xl mx-auto flex flex-col md:flex-row gap-8 items-center">
           {/* Image Section */}
           <div className="w-full md:w-1/3">
-            <img
-              src={`/uploads/About/${data.ourFoundationImage}`}
-              alt="College legacy"
-              className="rounded-2xl shadow-lg w-full object-cover aspect-[1]"
-            />
+            {data?.ourFoundationImage && (
+              <img
+                src={`/uploads/About/${data.ourFoundationImage}`}
+                alt="College legacy"
+                className="rounded-2xl shadow-lg w-full object-cover aspect-[1]"
+              />
+            )}
           </div>
 
           {/* Text Content Section */}
@@ -51,7 +53,9 @@ const OurLegacy = () => {
                   <h3 className="text-lg md:text-xl font-semibold text-gray-700 mb-1">Our Foundation</h3>
                 </div>
               </div>
-              <p className="h-45 overflow-y-scroll text-base md:text-lg leading-relaxed text-gray-600">{data.content}</p>
+              <p className="h-45 overflow-y-scroll text-base md:text-lg leading-relaxed text-gray-600">
+                {data?.content || "No content available"}
+              </p>
             </div>
           </div>
         </div>
