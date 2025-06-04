@@ -41,10 +41,13 @@ import {
     },
   ];
 
-  const heroSlides = images.map((img, i) => ({
-    image: `/uploads/Home/${img}`,
-    ...fallbackSlides[i], 
-  }));
+const heroSlides = Array.isArray(images)
+  ? images.map((img, i) => ({
+      image: `/uploads/Home/${img}`,
+      ...fallbackSlides[i],
+    }))
+  : [];
+  
   const finalSlides = heroSlides.length ? heroSlides : fallbackSlides.map((slide, i) => ({
     ...slide,
     image: [
