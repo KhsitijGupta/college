@@ -11,7 +11,6 @@ const OurLegacy = () => {
     axios.get('/api/about/getfoundation')
       .then((response) => {
         setData(response.data.foundation);
-        console.log(response.data)
         setLoading(false);
       })
       .catch((err) => {

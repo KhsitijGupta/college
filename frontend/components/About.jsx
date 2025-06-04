@@ -7,7 +7,7 @@ const About = () => {
   useEffect(() => {
     const fetchAboutData = async () => {
       try {
-        const response = await axios.get('/api/about/getrAboutContent'); // Adjust this URL to match your actual route
+        const response = await axios.get('/api/about/getAboutContent'); // Adjust this URL to match your actual route
         setAboutData(response.data.data);
       } catch (error) {
         console.error('Failed to fetch about data:', error);
