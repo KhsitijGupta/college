@@ -5,7 +5,7 @@ import {
   X,
  
 } from "lucide-react"
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
       const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -29,40 +29,40 @@ const Navbar = () => {
             {/* Desktop Menu */}
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
-                <Link
+                <NavLink
                   to="/"
                   className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   Home
-                </Link>
+                </NavLink>
                 
               
-                  <Link to={"/aboutUs"}
+                  <NavLink to={"/aboutUs"}
                     className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
 
                   >
                   
                   About
-                   </Link>
+                   </NavLink>
                 
-                <Link
+                <NavLink
                   to="#"
                   className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   Blogs
-                </Link>
-                <Link to="/eventGallery"
+                </NavLink>
+                <NavLink to="/eventGallery"
                   className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   Event Gallery
-                </Link>
-                <Link
+                </NavLink>
+                <NavLink
                   to="/contactUs"
                   className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   Contact
-                </Link>
-                <button className="ml-4 custom-button"> <Link to="/addmissionForm"> Admissions</Link></button>
+                </NavLink>
+                <button className="ml-4 custom-button"> <NavLink to="/addmissionForm"> Admissions</NavLink></button>
               </div>
             </div>
 
@@ -82,43 +82,43 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-lg">
-              <Link
+              <NavLink
                 to="/"
                 className="text-gray-900 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/aboutUs"
                 className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="#"
                 className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Blogs
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/eventGallery"
                 className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Event Gallery
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/contactUs"
                 className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
-              </Link>
+              </NavLink>
               <div className="px-3 py-2">
-                <button className="w-full custom-button"><Link to="/addmissionForm"> Admissions</Link></button>
+                <button className="w-full custom-button"><NavLink to="/addmissionForm"> Admissions</NavLink></button>
               </div>
             </div>
           </div>
