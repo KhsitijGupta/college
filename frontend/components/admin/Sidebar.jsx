@@ -14,6 +14,8 @@ import AddBlogDescription from "../../src/pages/admin/Blog/AddBlogDescription"
 import AddBlogLink from "../../src/pages/admin/Blog/AddBlogLink"
 
 import AddEventImages from "../../src/pages/admin/Event/AddEventImages"
+
+import AddFacilities from "../../src/pages/admin/Facilities/AddFacilities";
 import {
   BookOpen,
   ChevronDown,
@@ -25,9 +27,10 @@ import {
   LogOut,
   Menu,
   X,
-  GalleryVertical
+  GalleryVertical,
+  ListPlus,
 
-} from "lucide-react"
+} from "lucide-react"    
 
 
 export function Sidebar() {
@@ -140,6 +143,11 @@ export function Sidebar() {
                   label: "Event Gallery",
                   icon: Images,
                   submenu: ["Add Event Images"],
+                },
+                {
+                  label: "Facility",
+                  icon: ListPlus,
+                  submenu: ["Add Facilities"],
                 },
               ].map(({ label, icon: Icon, submenu, bg }) => (
                 <div key={label}>
@@ -274,6 +282,7 @@ export function Sidebar() {
           {activeView === "Add Link" && <AddBlogLink />}
 
           {activeView === "Add Event Images" && <AddEventImages />}
+          {activeView === "Add Facilities" && <AddFacilities />}
         </main>
       </div>
     </div>
