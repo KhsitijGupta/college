@@ -10,7 +10,6 @@ const OurLegacy = () => {
   useEffect(() => {
     axios.get('/api/about/getfoundation')
       .then((response) => {
-        console.log(response.data.foundation)
         setData(response.data.foundation);
         setLoading(false);
       })
@@ -35,7 +34,7 @@ const OurLegacy = () => {
           {/* Image Section */}
           <div className="w-full md:w-1/3">
             <img
-              src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCMv4JAeDMdh5y1NUWlFb2X-lMtDcr5Tu5QA&s'}
+              src={`/uploads/About/${data.ourFoundationImage}`}
               alt="College legacy"
               className="rounded-2xl shadow-lg w-full object-cover aspect-[1]"
             />
