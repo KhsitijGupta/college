@@ -8,10 +8,8 @@ import AddAboutContent from "../../src/pages/admin/About/AddAboutContent"
 import MissionVision from "../../src/pages/admin/About/MissionVision"
 import OurFoundation from "../../src/pages/admin/About/OurFoundation"
 
-import AddBlogImage from "../../src/pages/admin/Blog/AddBlogImage"
-import AddBlogTitle from "../../src/pages/admin/Blog/AddBlogTitle"
-import AddBlogDescription from "../../src/pages/admin/Blog/AddBlogDescription"
-import AddBlogLink from "../../src/pages/admin/Blog/AddBlogLink"
+import AddBlogData from "../../src/pages/admin/Blog/AddBlogData"
+
 
 import AddEventImages from "../../src/pages/admin/Event/AddEventImages"
 
@@ -31,6 +29,10 @@ import {
   ListPlus,
 
 } from "lucide-react"    
+import AddServices from "../../src/pages/admin/Home/AddServices";
+import AllServices from "../../src/pages/admin/Home/AllServices";
+import AllEventGalleryImages from "../../src/pages/admin/Event/AllEventGalleryImages";
+import AllBlogs from "../../src/pages/admin/Blog/AllBlogs";
 
 
 export function Sidebar() {
@@ -53,7 +55,7 @@ export function Sidebar() {
 
   const handleLogout = () => {
     sessionStorage.removeItem("adminUser");
-    navigate("/vvs/panel/login");
+    navigate("/");
   };
 
   useEffect(() => {
@@ -125,9 +127,9 @@ export function Sidebar() {
                   // bg: "bg-blue-50 text-blue-700 border-r-2 border-blue-600",
                 },
                 {
-                  label: "Banner",
+                  label: "Home",
                   icon: GalleryVertical,
-                  submenu: ["Add Home Banner", "All Banner Images"],
+                  submenu: ["Add Home Banner", "All Banner Images","Add Services","All Services"],
                 },
                 {
                   label: "About Us",
@@ -137,12 +139,12 @@ export function Sidebar() {
                 {
                   label: "Blog Section",
                   icon: BookOpen,
-                  submenu: ["Add Blog Image", "Add Blog Title", "Add Blog Description", "Add Blog Link"],
+                  submenu: ["Add Blog Data", "All Blogs"],
                 },
                 {
                   label: "Event Gallery",
                   icon: Images,
-                  submenu: ["Add Event Images"],
+                  submenu: ["Add Event Images","All Event Gallery Images"],
                 },
                 {
                   label: "Facility",
@@ -271,17 +273,20 @@ export function Sidebar() {
         <main className="flex-1 p-4 sm:p-6 bg-gray-50 overflow-y-auto">
           {activeView === "Add Home Banner" && <AddHomeBanner />}
           {activeView === "All Banner Images" && <AllBannerImages />}
+          {activeView === "Add Services" && <AddServices />}
+          {activeView === "All Services" && <AllServices />}
 
           {activeView === "Add About Content" && <AddAboutContent />}
           {activeView === "Mission & Vision" && <MissionVision />}
           {activeView === "Our Foundation" && <OurFoundation />}
 
-          {activeView === "Add Blog Image" && <AddBlogImage />}
-          {activeView === "Add Title" && <AddBlogTitle />}
-          {activeView === "Add Description" && <AddBlogDescription />}
-          {activeView === "Add Link" && <AddBlogLink />}
+          {activeView === "Add Blog Data" && <AddBlogData />}
+          {activeView === "All Blogs" && <AllBlogs/>}
+
 
           {activeView === "Add Event Images" && <AddEventImages />}
+          {activeView === "All Event Gallery Images" && <AllEventGalleryImages />
+          }
           {activeView === "Add Facilities" && <AddFacilities />}
         </main>
       </div>

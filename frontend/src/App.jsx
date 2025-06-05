@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/blogs" element={<BlogSection />} />
-        <Route path="//blogs/detail" element={<BlogDetail />} />
+        <Route path="/blogs/detail/:id" element={<BlogDetail />} />
         <Route path="/eventGallery" element={<EventGallery/>} />
         <Route path="/contactUs" element={<ContactUs  />} />
         <Route path="/addmissionForm" element={<CollegeAdmissionForm  />} />

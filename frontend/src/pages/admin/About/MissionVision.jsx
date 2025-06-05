@@ -1,13 +1,13 @@
-import {useState,useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const MissionVision = () => {
   const [missionVision, setMissionVision] = useState({
-    mission:'',
-    vision:'',
+    mission: '',
+    vision: '',
   });
-  
-    const handleInputChange = (e) => {
+
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setMissionVision((prev) => ({
       ...prev,
@@ -15,92 +15,84 @@ const MissionVision = () => {
     }));
   };
 
-
-    useEffect(() => {
-     async function getdata(){
-      try{
-
-        const result = await axios.get('/api/about/getmissionVision')
+  useEffect(() => {
+    async function getData() {
+      try {
+        const result = await axios.get('/api/about/getmissionVision');
         const mission = result.data.data?.mission || '';
         const vision = result.data.data?.vision || '';
-
-      setMissionVision({ mission, vision });
-      }catch(err){
-        console.error('data not fetched',err)
-        alert('data not fetched ! try again...')
+        setMissionVision({ mission, vision });
+      } catch (err) {
+        console.error('Data not fetched:', err);
+        alert('Data not fetched! Please try again.');
       }
-     }
-     getdata();
-    }, []);
+    }
+    getData();
+  }, []);
 
-const validations = ()=>{
-  if(missionVision.mission ===''&& missionVision.vision ===''){
-    return false;
-  }
-}
+  const isValid = () => {
+    return missionVision.mission.trim() !== '' && missionVision.vision.trim() !== '';
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(validations){
-      console.log(missionVision)
-      axios.put('/api/about/missionVisionUpdate',missionVision)
-      .then((res)=>{
-        alert(res.data.message)
-        setMissionVision({
-          mission:'',
-          vision:''
+    if (isValid()) {
+      axios
+        .put('/api/about/missionVisionUpdate', missionVision)
+        .then((res) => {
+          alert(res.data.message);
+          setMissionVision({ mission: '', vision: '' });
         })
-      })
-      .catch((err)=>{
-        alert('Data not updated ! try again ...');
-        console.error('data not saved',err)
-      })
-
-      
-      // Reset form
+        .catch((err) => {
+          alert('Data not updated! Please try again.');
+          console.error('Data not saved:', err);
+        });
+    } else {
+      alert("Mission & Vision can't be empty!");
     }
   };
-  
+
   return (
-    <div className="max-w-xl mx-auto mt-10 bg-white p-6 rounded-2xl shadow-lg">
-      <h2 className="text-2xl font-bold mb-6 text-center">Enter Mission & Vision</h2>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label className="block font-medium mb-1 text-gray-700">Mission Statement</label>
+    <div className="max-w-6xl mx-auto mt-5 bg-gradient-to-br from-white to-blue-50 p-8 rounded-3xl shadow-xl">
+      <h2 className="text-3xl font-extrabold mb-10 text-center text-blue-700 underline decoration-blue-500">Mission & Vision</h2>
+      
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Mission Section */}
+        <div className="flex flex-col">
+          <label className="text-lg font-semibold text-gray-800 mb-2">Mission Statement</label>
           <textarea
-            className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            rows="4"
+            className="border-2 border-gray-300 rounded-xl p-4 h-60 focus:ring-2 focus:ring-blue-400 resize-none bg-white shadow-sm"
+            name="mission"
             value={missionVision.mission}
             onChange={handleInputChange}
             placeholder="Write your mission statement here..."
-            required
-            name='mission'
           ></textarea>
         </div>
 
-        <div>
-          <label className="block font-medium mb-1 text-gray-700">Vision Statement</label>
+        {/* Vision Section */}
+        <div className="flex flex-col">
+          <label className="text-lg font-semibold text-gray-800 mb-2">Vision Statement</label>
           <textarea
-            className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            rows="4"
-            name='vision'
+            className="border-2 border-gray-300 rounded-xl p-4 h-60 focus:ring-2 focus:ring-blue-400 resize-none bg-white shadow-sm"
+            name="vision"
             value={missionVision.vision}
             onChange={handleInputChange}
             placeholder="Write your vision statement here..."
-            required
           ></textarea>
         </div>
 
-        <div className="text-center">
+        {/* Submit Button */}
+        <div className="col-span-1 md:col-span-2 flex justify-center">
           <button
             type="submit"
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-10 py-3 rounded-xl transition-all duration-300 shadow-md"
           >
-            Submit
+            Save Changes
           </button>
         </div>
       </form>
     </div>
   );
 };
+
 export default MissionVision;

@@ -44,9 +44,15 @@ const Services = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {programs.map((program, index) => (
             <div
-              key={index}
-              className="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-blue-100 group hover:-translate-y-3 overflow-hidden"
+            key={index}
+            className="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-blue-100 group hover:-translate-y-3 overflow-hidden"
             >
+              <div className="flex justify-center items-center mt-10">
+          <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full shadow-lg">
+            <GraduationCap className="w-8 h-8 text-white" />
+          </div>
+              </div>
+            {/* <GraduationCap className="w-8 h-8 text-white" /> */}
               {/* Image */}
               {program.image && (
                 <img
@@ -63,7 +69,7 @@ const Services = () => {
                   <Clock className="w-4 h-4" />
                   <span className="font-semibold">{program.duration}</span>
                 </div>
-                <p className="text-gray-600 leading-relaxed mb-6">{program.description}</p>
+                <p className="text-gray-600 text-justify leading-relaxed mb-6">{program.description}</p>
 
                 {/* Highlights */}
                 <div className="mb-6 text-left">
@@ -82,10 +88,10 @@ const Services = () => {
                 </div>
 
                 {/* Button */}
-                <button className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 flex items-center justify-center space-x-2 group/btn">
+                {/* <button className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 flex items-center justify-center space-x-2 group/btn">
                   <span>Learn More</span>
                   <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                </button>
+                </button> */}
               </div>
             </div>
           ))}

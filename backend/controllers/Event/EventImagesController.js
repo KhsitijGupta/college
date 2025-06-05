@@ -36,7 +36,19 @@ const uploadEventImage = async (req, res) => {
   }
 };
 
+const deleteEventGalleryImage = async (req, res) => {
+  const { imageUrl } = req.body;
+  try {
+    const result = await EventImages.findOneAndDelete({ image: imageUrl });
+    // Optionally also remove file from server with fs.unlink
+    res.status(200).json({ message: "Image deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to delete image" });
+  }
+};
+
 module.exports = {
   getEventImages,
-  uploadEventImage
+  uploadEventImage,
+  deleteEventGalleryImage,
 };

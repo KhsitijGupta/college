@@ -1,49 +1,44 @@
-const SingletonImages = require('../../models/Home/BannerModel.js');
+const BannerImage = require('../../models/Home/BannerImageModel.js');
 const fs = require('fs');
 const path = require('path');
 
+// Upload and save banner images (multiple uploads allowed)
 module.exports.createOrAddImages = async (req, res) => {
   try {
-    const image1 = req.files['image1']?.[0]?.filename || null;
-    const image2 = req.files['image2']?.[0]?.filename || null;
-    const image3 = req.files['image3']?.[0]?.filename || null;
+    const uploadedFiles = req.files; // This is an array
+    const savedImages = [];
 
-    const updatedImage = await SingletonImages.findOneAndUpdate(
-      {},
-      { image1, image2, image3 },
-      { new: true, upsert: true }
-    );
+    for (const file of uploadedFiles) {
+      const newImage = new BannerImage({ imageUrl: file.filename });
+      await newImage.save();
+      savedImages.push(newImage);
+    }
 
-    res.status(200).json({ message: 'Images saved successfully', data: updatedImage });
+    res.status(201).json({ message: 'Images uploaded successfully', data: savedImages });
   } catch (error) {
     console.error('Error saving images:', error);
-    res.status(500).json({ error: 'Failed to save images' });
+    res.status(500).json({ error: 'Failed to upload images' });
   }
 };
 
 
-
+// Get all banner images
 module.exports.getBannerImages = async (req, res) => {
   try {
-    const document = await SingletonImages.findOne();
+    const images = await BannerImage.find().sort({ createdAt: -1 });
 
-    if (!document) {
-      return res.status(404).json({ message: 'No banner images found.' });
-    }
-
-    // Gather images that are not null/undefined
-    const images = [document.image1, document.image2, document.image3].filter(Boolean);
-
-    if (images.length === 0) {
+    if (!images.length) {
       return res.status(404).json({ message: 'No banner images found.' });
     }
 
     res.status(200).json(images);
   } catch (error) {
-    res.status(500).json({ message: 'Failed to fetch banner images', error: error.message });
+    console.error('Error fetching images:', error);
+    res.status(500).json({ message: 'Failed to fetch banner images' });
   }
 };
 
+// Delete image by imageUrl (filename)
 module.exports.DeleteImage = async (req, res) => {
   try {
     const { imageUrl } = req.body;
@@ -52,43 +47,24 @@ module.exports.DeleteImage = async (req, res) => {
       return res.status(400).json({ error: "Image URL is required" });
     }
 
-    const document = await SingletonImages.findOne();
+    const imageDoc = await BannerImage.findOne({ imageUrl });
 
-    if (!document) {
-      return res.status(404).json({ error: "Banner images not found" });
+    if (!imageDoc) {
+      return res.status(404).json({ error: "Image not found in database" });
     }
 
-    let updatedFields = {};
-    let imageMatched = false;
-
-    // Check and nullify matched image fields
-    if (document.image1 === imageUrl) {
-      updatedFields.image1 = null;
-      imageMatched = true;
-    } else if (document.image2 === imageUrl) {
-      updatedFields.image2 = null;
-      imageMatched = true;
-    } else if (document.image3 === imageUrl) {
-      updatedFields.image3 = null;
-      imageMatched = true;
-    }
-
-    if (!imageMatched) {
-      return res.status(404).json({ error: "Image URL not found in database" });
-    }
-
-    // Remove image from filesystem
+    // Delete file from uploads folder
     const imagePath = path.join(__dirname, "../../uploads/Home", imageUrl);
     if (fs.existsSync(imagePath)) {
       fs.unlinkSync(imagePath);
     }
 
-    // Update DB
-    await SingletonImages.updateOne({ _id: document._id }, { $set: updatedFields });
+    // Delete from DB
+    await BannerImage.deleteOne({ _id: imageDoc._id });
 
     res.json({ message: "Image deleted successfully" });
   } catch (error) {
-    console.error(error);
+    console.error('Error deleting image:', error);
     res.status(500).json({ error: "Failed to delete image" });
   }
 };

@@ -1,68 +1,93 @@
-import React from "react";
-import {  Link } from "react-router-dom";
-import Navbar from "../../../components/Navbar";
-import Footer from "../../../components/Footer";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function BlogDetail() {
+  const { id } = useParams(); // get blog id from route params
+  const [blog, setBlog] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-const blog = {
-  title: "Exploring the Future of AI in Education",
-  description: `
-Artificial Intelligence (AI) is revolutionizing the education sector by transforming how students learn and how teachers deliver instruction. With the integration of AI tools, educators can personalize learning experiences based on individual student needs learning speeds and interests. AI algorithms analyze student performance in real time, identifying areas where a student may be struggling and suggesting tailored resources or interventions to improve understanding and retention.
+  useEffect(() => {
+    async function fetchBlog() {
+      try {
+        setLoading(true);
+        const res = await axios.get(`/api/blogs/getBlogDetail/${id}`); // adjust endpoint as per your backend
+        setBlog(res.data);
+        setError(null);
+      } catch (err) {
+        setError("Failed to load blog.");
+      } finally {
+        setLoading(false);
+      }
+    }
+    if (id) fetchBlog();
+  }, [id]);
 
-One of the most impactful uses of AI in classrooms is through adaptive learning platforms. These platforms automatically adjust the difficulty of questions and provide hints or explanations based on how a student responds. This creates a unique learning path for each individual, ensuring no one is left behind. AI can also automate administrative tasks such as grading assignments, tracking attendance, and even composing progress reports. This allows educators to focus more on instruction and student interaction rather than paperwork.
+  if (loading) {
+    return (
+      <>
+        <div className="container mx-auto mt-20 text-center text-gray-600">
+          Loading blog...
+        </div>
+      </>
+    );
+  }
 
-** kjsahflka
-** Real-time student performance analysis  
-** Automated grading and administrative task management  
-** Adaptive learning platforms for personalized education  
-** AI chatbots offering 24/7 learning support  
-** NLP tools for translation, summarization, and inclusivity 
-Beyond the classroom, AI-powered chatbots offer round-the-clock support for students helping answer questions, review concepts, and provide feedback. Tools like natural language processing (NLP) can translate content, summarize complex texts, and assist students with different linguistic backgrounds, making learning more accessible and inclusive.
+  if (error) {
+    return (
+      <>
+        <div className="container mx-auto mt-20 text-center text-red-600">
+          {error}
+        </div>
+      </>
+    );
+  }
 
-As powerful as AI is, it also raises questions about data privacy, algorithmic bias and over-reliance on automation. Educational institutions must tread carefully and ensure that these technologies are implemented ethically. The goal is not to replace teachers but to empower them — to augment human instruction with intelligent tools that improve efficiency and engagement.
+  if (!blog) {
+    return null; // or some fallback UI
+  }
 
-The future of AI in education is filled with promise. When used responsibly, it has the potential to bridge educational gaps, make learning more personalized, and ultimately unlock human potential on a global scale.
-  `.trim(),
-  image: "https://media.istockphoto.com/id/1398619494/photo/alarm-clock-and-coming-soon-written-white-lightbox-sitting-on-blue-background.jpg?s=1024x1024&w=is&k=20&c=5IYRQTjQ0UgVrd1wLo4qUpSk4qOOQeSLrMMX6lyeYlw=",
-  linkTile:"Youtube video",
-  link: "#",
-  date: "June 5, 2025",
-};
   return (
     <>
-        <div className="container /">
-        <Navbar/>
-    <br />
-        <div className="max-w-4xl mt-20 mx-auto py-10 px-6 bg-slate-50  rounded-xl">
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">{blog.title}</h1>
-            <p className="text-sm text-gray-600 mb-6 font-bold">{blog.date}</p>
-            <img src={blog.image} alt={blog.title} className="w-full h-96 object-cover rounded-xl mb-8 border-1 border-black" />
-            {blog.description.split('\n').map((line, i) => {
-                if (line.trim().startsWith("**")) {
-                    return (
-                    <ul key={i} className="list-disc list-inside text-gray-700 text-lg mb-2">
-                        <li>{line.replace("**", "").trim()}</li>
-                    </ul>
-                    );
-                }
-                return (
-                    <p key={i} className="text-gray-700 text-lg mb-4">{line.trim()}</p>
-                );
-                })}
+      <div className="container mx-auto">
+        <div className="max-w-4xl mt-20 mx-auto py-10 px-6 bg-slate-50 rounded-xl">
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">{blog.title}</h1>
+          <p className="text-sm text-gray-600 mb-6 font-bold">{new Date(blog.date).toLocaleDateString()}</p>
+          {blog.image && (
+            <img
+              src={`/${blog.image}`}
+              alt={blog.title}
+              className="w-full h-96 object-cover rounded-xl mb-8 border border-black"
+            />
+          )}
+          {blog.description.split('\n').map((line, i) => {
+            if (line.trim().startsWith("**")) {
+              return (
+                <ul key={i} className="list-disc list-inside text-gray-700 text-lg mb-2">
+                  <li>{line.replace("**", "").trim()}</li>
+                </ul>
+              );
+            }
+            return (
+              <p key={i} className="text-gray-700 text-lg mb-4">
+                {line.trim()}
+              </p>
+            );
+          })}
+          {blog.link && (
             <Link
-                to={blog.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline font-semibold text-xl"
+              to={blog.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline font-semibold text-xl"
             >
-                {blog.linkTile} →
+              {blog.linkTitle || "External Link"} →
             </Link>
-            
-                </div>
+          )}
         </div>
-        <br />
-        <Footer/>
-     </>
+      </div>
+
+    </>
   );
 }
