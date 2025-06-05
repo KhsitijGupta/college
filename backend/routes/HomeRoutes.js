@@ -1,6 +1,7 @@
 const { getBannerImages, DeleteImage, createOrAddImages } = require('../controllers/Home/BannerController.js');
 const getImageUploader = require('../controllers/Home/ImageController.js');
 const express = require('express');
+const { getPrograms, createProgram } = require('../controllers/Home/ServiceContoller.js');
 
 const HomeRouter =express.Router();
 const upload = getImageUploader('/Home');
@@ -15,5 +16,7 @@ HomeRouter.post('/uploadBannerImages', upload.fields([
 
 HomeRouter.delete('/deleteBannerImages', DeleteImage);
 
+HomeRouter.get("/getAllPrograms", getPrograms);
+HomeRouter.post("/uploadPrograms", createProgram);
 
 module.exports = HomeRouter;

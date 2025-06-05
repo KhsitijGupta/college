@@ -73,12 +73,7 @@ const handleSubmit = async (e) => {
         });
 
         if (response.data.success) {
-            // Save login data to session storage
-            // Example: save a token or user object sent from backend
             sessionStorage.setItem("adminUser", JSON.stringify(response.data.user)); 
-            // or if you have a token: sessionStorage.setItem("token", response.data.token);
-
-            // Navigate to dashboard
             navigate("/vvs/panel/dashboard");
         } else {
             setLoginError(response.data.message || "Invalid email or password.");
