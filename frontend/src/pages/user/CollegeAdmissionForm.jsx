@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Navbar from "../../../components/Navbar"
 import Footer from "../../../components/Footer"
+import img from "../../../public/images/1.webp"
 
 const CollegeAdmissionForm = () => {
   const [formData, setFormData] = useState({
@@ -45,7 +46,7 @@ const CollegeAdmissionForm = () => {
       <div
         className="mt-12 min-h-screen bg-cover bg-center py-6 px-4 "
         style={{
-              backgroundImage: `url('/images/formBg.jpg')`, // Correct usage
+          backgroundImage: `url('/images/formBg.jpg')`, // Correct usage
         }}
       >
         <div className="max-w-5xl mx-auto flex flex-col items-center justify-center ">
@@ -66,11 +67,10 @@ const CollegeAdmissionForm = () => {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex-1 py-4 px-6 text-sm font-medium transition-all duration-200 ${
-                      activeTab === tab.id
+                    className={`flex-1 py-4 px-6 text-sm font-medium transition-all duration-200 ${activeTab === tab.id
                         ? "bg-white text-blue-600 border-b-2 border-blue-600 shadow-sm"
                         : "text-gray-600 hover:text-blue-600 hover:bg-white/50"
-                    }`}
+                      }`}
                   >
                     <span className="mr-2">{tab.icon}</span>
                     {tab.label}
@@ -360,7 +360,11 @@ const CollegeAdmissionForm = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <div className="grid grid-cols-1 md:grid-cols-2 ">
+        <img src={img} alt="" />
+         <img src={img} alt="" />
+      </div>
+      <Footer />
     </>
   )
 }
