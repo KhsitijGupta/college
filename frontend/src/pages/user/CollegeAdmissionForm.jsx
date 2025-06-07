@@ -3,8 +3,8 @@
 import { useState } from "react"
 import Navbar from "../../../components/Navbar"
 import Footer from "../../../components/Footer"
-import img from "../../../public/images/1.webp"
-import female from "../../../public/images/female.png"
+import img from "/images/1.webp"
+import female from "/images/female.png"
 
 const CollegeAdmissionForm = () => {
   const [formData, setFormData] = useState({

@@ -62,6 +62,7 @@ const Navbar = () => {
                 >
                   Contact
                 </NavLink>
+                <button className="w-28 ml-4 bg-blue-800 hover:bg-blue-200 hover:text-blue-800 hover:font-bold text-slate-100 p-2 rounded-lg"> <NavLink to="/#">Online Fees</NavLink></button>
                 <button className="ml-4 custom-button"> <NavLink to="/addmissionForm"> Admissions</NavLink></button>
               </div>
             </div>
