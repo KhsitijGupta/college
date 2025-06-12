@@ -33,6 +33,7 @@ import AddServices from "../../src/pages/admin/Home/AddServices";
 import AllServices from "../../src/pages/admin/Home/AllServices";
 import AllEventGalleryImages from "../../src/pages/admin/Event/AllEventGalleryImages";
 import AllBlogs from "../../src/pages/admin/Blog/AllBlogs";
+import AddTopbarContent from "../../src/pages/admin/Topbar/AddTopbarContent";
 
 
 export function Sidebar() {
@@ -147,9 +148,9 @@ export function Sidebar() {
                   submenu: ["Add Event Images","All Event Gallery Images"],
                 },
                 {
-                  label: "Facility",
+                  label: "Topbar",
                   icon: ListPlus,
-                  submenu: ["Add Facilities"],
+                  submenu: ["Add Topbar Content"],
                 },
               ].map(({ label, icon: Icon, submenu, bg }) => (
                 <div key={label}>
@@ -287,7 +288,7 @@ export function Sidebar() {
           {activeView === "Add Event Images" && <AddEventImages />}
           {activeView === "All Event Gallery Images" && <AllEventGalleryImages />
           }
-          {activeView === "Add Facilities" && <AddFacilities />}
+          {activeView === "Add Topbar Content" && <AddTopbarContent />}
         </main>
       </div>
     </div>

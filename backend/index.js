@@ -12,6 +12,7 @@ const AboutRoute = require('./routes/AboutRoutes');
 const EventRouter = require('./routes/EventRoutes');
 const AdminRouter = require('./routes/AdminRoutes');
 const BlogsRouter = require('./routes/BlogsRoutes');
+const TopbarRouter = require('./routes/TopbarRoutes');
 app.use(cors());
 
 app.use(express.json());
@@ -37,6 +38,7 @@ app.use('/api/about',AboutRoute)
 app.use('/api/event',EventRouter)
 app.use('/api/blogs',BlogsRouter)
 app.use('/api/admin',AdminRouter)
+app.use('/api/topbar',TopbarRouter)
 
 
 const port = process.env.Port || 3000;

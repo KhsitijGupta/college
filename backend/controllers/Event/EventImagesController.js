@@ -4,7 +4,7 @@ const EventImages = require('../../models/EventGallery/EventGalleryModel.js')
 // GET all event images
 const getEventImages = async (req, res) => {
   try {
-    const images = await EventImages.find().sort({ createdAt: -1 });
+    const images = await EventImages.find();
     res.status(200).json(images);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch event images' });
@@ -14,18 +14,13 @@ const getEventImages = async (req, res) => {
 // POST upload a new event image
 const uploadEventImage = async (req, res) => {
   try {
-    if (!req.files || Object.keys(req.files).length === 0) {
+    if (!req.files || req.files.length === 0) {
       return res.status(400).json({ error: 'No images uploaded' });
     }
 
-    const imageEntries = [];
-
-    // Safely iterate over uploaded files
-    Object.entries(req.files).forEach(([key, files]) => {
-      if (files.length > 0) {
-        imageEntries.push({ image: files[0].filename });
-      }
-    });
+    const imageEntries = req.files.map(file => ({
+      image: file.filename,
+    }));
 
     const savedImages = await EventImages.insertMany(imageEntries);
 
@@ -35,6 +30,7 @@ const uploadEventImage = async (req, res) => {
     res.status(500).json({ error: 'Image upload failed' });
   }
 };
+
 
 const deleteEventGalleryImage = async (req, res) => {
   const { imageUrl } = req.body;

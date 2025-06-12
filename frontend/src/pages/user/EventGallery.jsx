@@ -53,7 +53,7 @@ const EventGallery = () => {
               <div
                 key={idx}
                 className="group cursor-pointer overflow-hidden rounded-lg shadow-md bg-white transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
-                onClick={() => openModal({ src: `/uploads/EventGallery/${imageObj.image}`, alt: `Event Image ${idx + 1}` })}
+                onClick={() => openModal({ src: `/uploads/Event/${imageObj.image}`, alt: `Event Image ${idx + 1}` })}
               >
                 <div className="aspect-square overflow-hidden">
                   <img
