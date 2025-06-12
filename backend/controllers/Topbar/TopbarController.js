@@ -1,7 +1,7 @@
-import Topbar from '../../models/Topbar/TopbarModel.js';
+const Topbar = require ('../../models/Topbar/TopbarModel.js');
 
 // Upload or update the topbar config (only one document will exist)
-export const uploadOrUpdateTopbar = async (req, res) => {
+module.exports.uploadOrUpdateTopbar = async (req, res) => {
   try {
     const { message, link } = req.body;
 
@@ -27,7 +27,7 @@ export const uploadOrUpdateTopbar = async (req, res) => {
 };
 
 // Get the existing topbar config
-export const getTopbar = async (req, res) => {
+module.exports.getTopbar = async (req, res) => {
   try {
     const topbar = await Topbar.findOne();
 
