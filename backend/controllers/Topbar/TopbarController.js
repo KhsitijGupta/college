@@ -1,6 +1,4 @@
 const Topbar = require('../../models/Topbar/TopbarModel.js');
-
-// Upload or update the topbar config (only one document will exist)
 module.exports.uploadOrUpdateTopbar = async (req, res) => {
   try {
     const { message, link } = req.body;
