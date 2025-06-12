@@ -1,6 +1,6 @@
 // models/TopbarModel.js
+const mongoose = require('mongoose');
 
-import mongoose from 'mongoose';
 
 const topbarSchema = new mongoose.Schema({
   message: {
@@ -15,6 +15,5 @@ const topbarSchema = new mongoose.Schema({
   timestamps: true // optional, for createdAt & updatedAt
 });
 
-const Topbar = mongoose.model('Topbar', topbarSchema);
+module.exports = mongoose.model('Topbar', topbarSchema);
 
-export default Topbar;

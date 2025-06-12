@@ -24,7 +24,7 @@ const Navbar = () => {
 
 
   return (
-    <div className={`fixed w-full z-50 transition-transform duration-300 ${showNavbar ? "translate-y-0" : "-translate-y-full"}`}>
+    <div className={`fixed  w-full z-50 transition-transform duration-300 ${showNavbar ? "translate-y-0" : "-translate-y-full"}`}>
       {/* Short Blue Navbar */}
       <Topbar show={showNavbar}/>
 

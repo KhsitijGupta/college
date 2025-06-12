@@ -1,64 +1,76 @@
 const Foundation = require('../../models/AboutsModel/FoundationModel.js');
 
-module.exports.createOrUpdateFoundation = async (req, res) => {
+// Create new foundation entry
+module.exports.createFoundation = async (req, res) => {
   try {
-    const data = req.body;
+    const { name, content } = req.body;
+    const image = req.file?.filename || null;
 
-    const foundation = await Foundation.findOneAndUpdate(
-      {}, 
-      { content :data.content,
-        name:data.name,
-        ourFoundationImage:'',
-      },
-      {
-        new: true,            
-        upsert: true,
-        setDefaultsOnInsert: true
-      }
-    );
+    const foundation = new Foundation({
+      name,
+      content,
+      ourFoundationImage: image
+    });
 
-    res.status(200).json({ message: 'Content saved successfully!', foundation });
+    await foundation.save();
+
+    res.status(201).json({ message: 'Foundation created successfully', foundation });
   } catch (error) {
-    res.status(500).json({ message: 'Failed to save content', error });
+    console.error("Error creating foundation:", error);
+    res.status(500).json({ message: 'Failed to create foundation', error });
   }
 };
 
-
-module.exports.getFoundation = async (req, res) => {
+// Get all foundation entries
+module.exports.getFoundations = async (req, res) => {
   try {
-    const foundation = await Foundation.findOne().sort({ createdAt: -1 });
+    const foundations = await Foundation.find().sort({ createdAt: 1 });
 
-    if (!foundation) {
-      return res.status(404).json({ message: 'No content found' });
-    }
-
-    res.status(200).json({ foundation });
+    res.status(200).json({ foundations });
   } catch (error) {
-    res.status(500).json({ message: 'Failed to fetch content', error });
+    console.error("Error fetching foundations:", error);
+    res.status(500).json({ message: 'Failed to fetch foundations', error });
   }
 };
 
-module.exports.createOrUpdateimage = async (req, res) => {
+module.exports.updateFoundationById = async (req, res) => {
   try {
-    // const { image } = req.body;
-       const image = req.file?.filename|| null;
-    if (!image) {
-      return res.status(400).json({ error: 'Image is required.' });
-    }
-    // Find the existing single document or create it if it doesn't exist
-    const foundation = await Foundation.findOneAndUpdate(
-      {},
-      { $set: { ourFoundationImage: image } },
-      {
-        new: true,
-        upsert: true, // create if not found
-        setDefaultsOnInsert: true
-      }
+    const { id } = req.params;
+    const { name, content } = req.body;
+    const image = req.file?.filename || null;
+
+    const updateFields = { name, content };
+    if (image) updateFields.ourFoundationImage = image;
+
+    const updatedFoundation = await Foundation.findByIdAndUpdate(
+      id,
+      { $set: updateFields },
+      { new: true }
     );
 
-    res.status(200).json({ message: 'Foundation image updated successfully.', foundation });
+    if (!updatedFoundation) {
+      return res.status(404).json({ message: 'Foundation not found' });
+    }
+
+    res.status(200).json({ message: 'Foundation updated', foundation: updatedFoundation });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error("Error updating foundation:", error);
+    res.status(500).json({ message: 'Failed to update foundation', error });
+  }
+};
+
+module.exports.deleteFoundation = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleted = await Foundation.findByIdAndDelete(id);
+
+    if (!deleted) {
+      return res.status(404).json({ message: 'Foundation not found' });
+    }
+
+    res.status(200).json({ message: 'Foundation deleted successfully' });
+  } catch (error) {
+    console.error("Error deleting foundation:", error);
+    res.status(500).json({ message: 'Failed to delete foundation', error });
   }
 };

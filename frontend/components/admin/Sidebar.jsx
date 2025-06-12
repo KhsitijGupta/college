@@ -6,14 +6,13 @@ import AllBannerImages from "../../src/pages/admin/Home/AllBannerImages"
 
 import AddAboutContent from "../../src/pages/admin/About/AddAboutContent"
 import MissionVision from "../../src/pages/admin/About/MissionVision"
-import OurFoundation from "../../src/pages/admin/About/OurFoundation"
+import AddFoundation from "../../src/pages/admin/About/AddFoundation"
 
 import AddBlogData from "../../src/pages/admin/Blog/AddBlogData"
 
 
 import AddEventImages from "../../src/pages/admin/Event/AddEventImages"
 
-import AddFacilities from "../../src/pages/admin/Facilities/AddFacilities";
 import {
   BookOpen,
   ChevronDown,
@@ -34,6 +33,7 @@ import AllServices from "../../src/pages/admin/Home/AllServices";
 import AllEventGalleryImages from "../../src/pages/admin/Event/AllEventGalleryImages";
 import AllBlogs from "../../src/pages/admin/Blog/AllBlogs";
 import AddTopbarContent from "../../src/pages/admin/Topbar/AddTopbarContent";
+import AllFounders from "../../src/pages/admin/About/AllFounders";
 
 
 export function Sidebar() {
@@ -135,7 +135,7 @@ export function Sidebar() {
                 {
                   label: "About Us",
                   icon: Users,
-                  submenu: ["Add About Content", "Mission & Vision", "Our Foundation"],
+                  submenu: ["Add About Content", "Mission & Vision", "Add Founders","All Founders"],
                 },
                 {
                   label: "Blog Section",
@@ -279,7 +279,8 @@ export function Sidebar() {
 
           {activeView === "Add About Content" && <AddAboutContent />}
           {activeView === "Mission & Vision" && <MissionVision />}
-          {activeView === "Our Foundation" && <OurFoundation />}
+          {activeView === "Add Founders" && <AddFoundation />}
+          {activeView === "All Founders" && <AllFounders />}
 
           {activeView === "Add Blog Data" && <AddBlogData />}
           {activeView === "All Blogs" && <AllBlogs/>}

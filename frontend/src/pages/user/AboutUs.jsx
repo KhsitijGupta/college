@@ -25,12 +25,12 @@ const AboutUs = () => {
     <>
     <Navbar/>
       {/* Hero Header with Light Theme */}
-      <header className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 text-gray-800 overflow-hidden">
+      <header className=" bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 text-gray-800 overflow-hidden">
         <div className="absolute inset-0 bg-white/30"></div>
         <div className="absolute inset-0 opacity-20">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-100/50 via-transparent to-purple-100/50"></div>
         </div>
-        <div className="relative container mx-auto px-4 py-24 text-center">
+        <div className="relative container mx-auto px-4 py-24 text-center mt-20">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full mb-6 shadow-lg">
             <Scale className="w-10 h-10 text-white" />
           </div>

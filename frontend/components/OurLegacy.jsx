@@ -3,14 +3,14 @@ import axios from 'axios';
 import { BookOpen } from 'lucide-react';
 
 const OurLegacy = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     axios.get('/api/about/getfoundation')
       .then((response) => {
-        setData(response.data.foundation);
+        setData(response.data.foundations);
         setLoading(false);
       })
       .catch((err) => {
@@ -23,41 +23,42 @@ const OurLegacy = () => {
   if (error) return <p className="text-center py-16 text-red-500">Error: {error}</p>;
 
   return (
-    <section className="pt-16 md:pt-20 bg-gradient-to-b from-white to-gray-50">
+    <section className="pt-16 my-10 md:pt-20 bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-700 mb-4">About Our Lagacy</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-700 mb-4">About Our Legacy</h2>
           <div className="w-20 md:w-24 h-1 bg-gradient-to-r from-blue-400 to-indigo-500 mx-auto mb-6 md:mb-8"></div>
         </div>
 
-        <div className="bg-white mb-7 rounded-2xl md:shadow-lg p-6 sm:p-8 md:p-12 border border-blue-100 max-w-6xl mx-auto flex flex-col md:flex-row gap-8 items-center">
-          {/* Image Section */}
-          <div className="w-full md:w-1/3">
-            {data?.ourFoundationImage && (
-              <img
-                src={`/uploads/About/${data.ourFoundationImage}`}
-                alt="College legacy"
-                className="rounded-2xl shadow-lg w-full object-cover aspect-[1]"
-              />
-            )}
-          </div>
+        <div className="flex flex-wrap justify-center gap-6">
+          {data.map((item, index) => (
+            <div
+              key={index}
+              className="w-full sm:w-[90%] md:w-[45%] lg:w-[30%] bg-white rounded-2xl shadow-lg border border-blue-100 p-4 flex flex-col"
+            >
+              {/* Image */}
+              {item?.ourFoundationImage && (
+                <img
+                  src={`/uploads/About/${item.ourFoundationImage}`}
+                  alt={`Legacy ${index}`}
+                  className="rounded-t-xl shadow-md object-cover w-60 h-60 mb-4 mx-auto"
+                />
+              )}
 
-          {/* Text Content Section */}
-          <div className="w-full md:w-2/3">
-            <div className="bg-white rounded-2xl shadow-md md:shadow-lg p-6 sm:p-8 md:p-12 border border-blue-100">
-              <div className="flex items-start space-x-4 mb-4 md:mb-6">
-                <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-lg flex items-center justify-center">
-                  <BookOpen className="w-5 h-5 md:w-6 md:h-6 text-white" />
+              {/* Content */}
+              <div className="flex items-start space-x-3 mb-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-lg flex items-center justify-center">
+                  <BookOpen className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg md:text-xl font-semibold text-gray-700 mb-1">Our Foundation</h3>
+                  <h3 className="text-lg font-semibold text-gray-700">{item.name || "Legacy Title"}</h3>
                 </div>
               </div>
-              <p className="h-45 overflow-y-scroll text-base md:text-lg leading-relaxed text-gray-600">
-                {data?.content || "No content available"}
+              <p className="p-1 rounded-xl text-gray-600 text-sm overflow-y-auto max-h-40 whitespace-pre-line">
+                {item?.content || "No content available."}
               </p>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

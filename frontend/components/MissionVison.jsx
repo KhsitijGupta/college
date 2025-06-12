@@ -28,7 +28,7 @@ const MissionVision = () => {
   return (
     <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-50">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 ">
           {/* Mission */}
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-blue-200 hover:bg-white/90 transition-all duration-300 shadow-lg">
             <div className="flex items-center mb-6">

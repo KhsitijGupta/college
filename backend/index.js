@@ -7,13 +7,13 @@ const dotenv = require('dotenv')
 dotenv.config();
 
 const cors = require("cors");
+app.use(cors());
 const HomeRouter = require('./routes/HomeRoutes');
 const AboutRoute = require('./routes/AboutRoutes');
 const EventRouter = require('./routes/EventRoutes');
 const AdminRouter = require('./routes/AdminRoutes');
 const BlogsRouter = require('./routes/BlogsRoutes');
 const TopbarRouter = require('./routes/TopbarRoutes');
-app.use(cors());
 
 app.use(express.json());
 
@@ -41,7 +41,7 @@ app.use('/api/admin',AdminRouter)
 app.use('/api/topbar',TopbarRouter)
 
 
-const port = process.env.Port || 3000;
+const port = process.env.Port || 5010;
 app.listen(port ,()=>{
     console.log(`Server is listening on ${port}`)
 })
