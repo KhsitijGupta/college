@@ -10,7 +10,6 @@ module.exports.AdminLogin = async (req, res) => {
     if (!admin) {
       return res.status(401).json({ success: false, message: "Invalid email." });
     }
-console.log(password+ "\n"+admin.password)
     // Plain-text password comparison
     if (password !== admin.password) {
 
